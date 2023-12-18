@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { useForm } from 'react-hook-form'
 
 import Navbar from '@/components/layout/Navbar'
 import SpaceContainer from '@/components/layout/SpaceContainer'
@@ -13,7 +14,7 @@ const FormContainerOut = styled.div`
 
 const FormContainer = styled.div`
   padding: 0px 40px 40px 40px;
-`  
+`
 
 const Form = styled.form`
   display: flex;
@@ -33,10 +34,25 @@ const Title = styled.p`
   font-size: 30px;
   font-weight: bold;
   text-align: center;
-  
 `
 
 function RegisterPage() {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    watch
+  } = useForm()
+
+  const handleForm = (data) => {
+    console.log(data)
+  }
+
+  const handleConfirmPasswordChange = (value) => {
+    setValue('confirmPassword', value)
+  }
+
   return (
     <>
       <Navbar />
@@ -46,38 +62,104 @@ function RegisterPage() {
             <h2>Cadastro</h2>
           </Title>
           <FormContainer>
-            <Form>
-              <Input 
-                type="text" 
-                label="Nome completo" 
-                placeholder="Digite seu nome completo" 
+            <Form onSubmit={handleSubmit(handleForm)}>
+              <Input
+                type="text"
+                label="Nome completo"
+                placeholder="Digite seu nome completo"
+                {...register('name', {
+                  required: 'Nome é obrigatório',
+                  pattern: {
+                    value: /^[A-Za-z\s]+$/,
+                    message: 'Nome inválido'
+                  },
+                  maxLength: {
+                    value: 255,
+                    message: 'Nome muito longo'
+                  }
+                })}
               />
-              <Input 
-                type="email" 
-                label="E-mail" 
+              {errors.name && <p style={{ color: 'red' }}>{errors.name.message}</p>}
+
+              <Input
+                type="email"
+                label="E-mail"
                 placeholder="Digite seu e-mail"
+                {...register('email', {
+                  required: 'E-mail é obrigatório',
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: 'E-mail inválido'
+                  }
+                })}
               />
-              <Input 
-                type="number" 
-                label="Telefone" 
+              {errors.email && <p style={{ color: 'red' }}>{errors.email.message}</p>}
+
+              <Input
+                label="Telefone"
                 placeholder="(11) 12345-6789"
+                mask="+99 (99) 99999-9999"
+                {...register('telefone', {
+                  required: 'Telefone é obrigatório',
+                  pattern: {
+                    value: /^\+\d{2} \(\d{2}\) \d{5}-\d{4}$/,
+                    message: 'Telefone inválido'
+                  }
+                })}
               />
-              <Input 
-                type="date" 
-                label="Data de nascimento" 
-                placeholder="DD/MM/AAAA" 
+              {errors.telefone && <p style={{ color: 'red' }}>{errors.telefone.message}</p>}
+
+              <Input
+                type="date"
+                label="Data de nascimento"
+                {...register('date', {
+                  required: 'Data de nascimento é obrigatória',
+                  validate: (value) => {
+                    const birthDate = new Date(value)
+                    const currentDate = new Date()
+                    const age = currentDate.getFullYear() - birthDate.getFullYear()
+
+                    // Se o usuário for menor de 18 anos, a validação falha
+                    return age >= 18 || 'Usuários menores de 18 anos não podem se cadastrar'
+                  }
+                })}
               />
-              <Input 
-                type="password" 
-                label="Senha" 
+              {errors.date && <p style={{ color: 'red' }}>{errors.date.message}</p>}
+
+              <Input
+                type="password"
+                label="Senha"
                 placeholder="Digite sua senha"
+                {...register('password', {
+                  required: 'Senha é obrigatória',
+                  minLength: {
+                    value: 8,
+                    message: 'A senha deve ter pelo menos 8 caracteres'
+                  },
+                  pattern: {
+                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                    message:
+                      'A senha deve conter pelo menos uma letra minúscula, uma letra maiúscula, um número e um caractere especial'
+                  }
+                })}
               />
-              <Input 
-                type="password" 
-                label="Confirmar senha" 
+              {errors.password && <p style={{ color: 'red' }}>{errors.password.message}</p>}
+
+              <Input
+                type="password"
+                label="Confirmar senha"
                 placeholder="A senha deve ser idêntica a anterior"
+                onChange={(e) => handleConfirmPasswordChange(e.target.value)}
+                {...register('confirmPassword', {
+                  required: 'Confirmação de senha é obrigatória',
+                  validate: (value) => value === watch('password') || 'As senhas não conferem'
+                })}
               />
-              <ButtonBlue>Cadastrar</ButtonBlue>
+              {errors.confirmPassword && (
+                <p style={{ color: 'red' }}>{errors.confirmPassword.message}</p>
+              )}
+
+              <ButtonBlue type="submit">Cadastrar</ButtonBlue>
             </Form>
             <Text>
               Já possui uma conta? <a href="#"> login</a>

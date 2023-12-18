@@ -9,8 +9,8 @@ const GlobalStyle = createGlobalStyle`
         
       body {
         font-family: 'Roboto', sans-serif;
-        color: ${props => props.theme.colorTextForm};
-        background-color: ${props => props.theme.background};
+        color: ${(props) => props.theme.colorTextForm};
+        background-color: ${(props) => props.theme.background};
       }
     `
 function App({ Component, pageProps }) {
