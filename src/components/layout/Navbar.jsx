@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+import Logo from './Logo'
 import { Button } from './inputs/Button'
 
 const StyledNavbar = styled.div`
@@ -7,17 +7,26 @@ const StyledNavbar = styled.div`
   height: 80px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   color: ${(props) => props.theme.colorText};
+  padding: 0 41px;
+`
+
+const ContainerNavbar = styled.div`
+  width: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
 `
 
 const StyledImage = styled.span`
-  background-image: url('/microfone-pipoca.jpg');
-  background-position: left;
+  background-image: url('/logo.svg');
+  background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   margin-left: 30px;
 
-  width: 4%;
+  min-width: 90px;
   height: 6vh;
 `
 
@@ -38,19 +47,20 @@ const StyledBlog = styled.span`
 `
 
 const StyledLogin = styled.span`
-  margin-left: 850px;
-  margin-right: 50px;
+  width: 10%;
 `
 
 function Navbar() {
   return (
     <StyledNavbar>
-      <StyledImage />
-      <StyledInicio>Início</StyledInicio>
-      <StyledSobre>Sobre</StyledSobre>
-      <StyledEpisodios>Episódios</StyledEpisodios>
-      <StyledProjetos>Projetos</StyledProjetos>
-      <StyledBlog>Blog</StyledBlog>
+      <ContainerNavbar>
+        <Logo />
+        <StyledInicio>Início</StyledInicio>
+        <StyledSobre>Sobre</StyledSobre>
+        <StyledEpisodios>Episódios</StyledEpisodios>
+        <StyledProjetos>Projetos</StyledProjetos>
+        <StyledBlog>Blog</StyledBlog>
+      </ContainerNavbar>
       <StyledLogin>
         <Button>Login</Button>
       </StyledLogin>
