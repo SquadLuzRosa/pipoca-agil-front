@@ -8,6 +8,7 @@ export const Button = styled.button`
   border: 1px solid ${(props) => props.theme.colorText};
   color: ${(props) => props.theme.colorText};
   font-weight: bold;
+
 `
 export const ButtonBlue = styled.button`
   background-color: ${(props) => props.theme.colorText};

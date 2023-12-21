@@ -47,7 +47,7 @@ const StyledBlog = styled.span`
 `
 
 const StyledLogin = styled.span`
-  width: 10%;
+  width: 6%;
 `
 
 function Navbar() {
