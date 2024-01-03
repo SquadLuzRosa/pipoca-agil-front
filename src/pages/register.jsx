@@ -1,15 +1,24 @@
 import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
+import { useRef, useState, useEffect } from 'react'
 
 import Navbar from '@/components/layout/Navbar'
 import SpaceContainer from '@/components/layout/SpaceContainer'
 import Input from '@/components/layout/inputs/Input'
-import { ButtonBlue } from '@/components/layout/inputs/Button'
+import { ButtonBlue, Button } from '@/components/layout/inputs/Button'
+import {
+  ModalButtons,
+  ModalContent,
+  StyledModal,
+  TitleModal
+} from '@/components/layout/ModalConfirmation'
+import { SuccessModal, SuccessButtons } from '@/components/layout/SuccessModal'
 
 const FormContainerOut = styled.div`
   border: 1px solid ${(props) => props.theme.inputBorder};
   border-radius: 12px;
   background-color: white;
+  padding: 0px 40px 40px 40px;
 `
 
 const FormContainer = styled.div`
@@ -36,6 +45,11 @@ const Title = styled.p`
   text-align: center;
 `
 
+const Label = styled.p`
+  color: ${(props) => props.theme.black};
+  font-weight: bold;
+`
+
 function RegisterPage() {
   const {
     register,
@@ -45,13 +59,43 @@ function RegisterPage() {
     watch
   } = useForm()
 
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
+  const successModalRef = useRef(null)
+
   const handleForm = (data) => {
     console.log(data)
+    setIsModalOpen(true)
   }
 
   const handleConfirmPasswordChange = (value) => {
     setValue('confirmPassword', value)
   }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+  }
+
+  const openSuccessModal = () => {
+    setIsModalOpen(false)
+    setIsSuccessModalOpen(true)
+  }
+
+  const closeSuccessModal = () => {
+    setIsSuccessModalOpen(false)
+    setIsModalOpen(false)
+  }
+
+  const reopenModal = () => {
+    setIsSuccessModalOpen(false)
+    setIsModalOpen(false)
+  }
+
+  useEffect(() => {
+    if (isSuccessModalOpen && successModalRef.current) {
+      successModalRef.current.focusFirstInput()
+    }
+  }, [isSuccessModalOpen])
 
   return (
     <>
@@ -67,7 +111,7 @@ function RegisterPage() {
                 type="text"
                 label="Nome completo"
                 placeholder="Digite seu nome completo"
-                {...register('name', {
+                {...register('nome', {
                   required: 'Nome é obrigatório',
                   pattern: {
                     value: /^[A-Za-z\s]+$/,
@@ -79,7 +123,7 @@ function RegisterPage() {
                   }
                 })}
               />
-              {errors.name && <p style={{ color: 'red' }}>{errors.name.message}</p>}
+              {errors.nome && <p style={{ color: 'red' }}>{errors.nome.message}</p>}
 
               <Input
                 type="email"
@@ -98,11 +142,11 @@ function RegisterPage() {
               <Input
                 label="Telefone"
                 placeholder="(11) 12345-6789"
-                mask="+99 (99) 99999-9999"
+                mask="(99) 99999-9999"
                 {...register('telefone', {
                   required: 'Telefone é obrigatório',
                   pattern: {
-                    value: /^\+\d{2} \(\d{2}\) \d{5}-\d{4}$/,
+                    value: /^\(?\d{2}\)?[-.\s]?\d{4,5}[-.\s]?\d{4}$/,
                     message: 'Telefone inválido'
                   }
                 })}
@@ -167,6 +211,48 @@ function RegisterPage() {
           </FormContainer>
         </FormContainerOut>
       </SpaceContainer>
+      <StyledModal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Confirmação de Dados"
+      >
+        <div>
+          <TitleModal>
+            <h2>Os Dados informados estão corretos?</h2>
+          </TitleModal>
+          <ModalContent>
+            <Label>
+              <p label>Nome completo: </p>
+            </Label>
+            <p>{watch('nome')}</p>
+            <Label>
+              <p>E-mail: </p>
+            </Label>
+            <p>{watch('email')}</p>
+            <Label>
+              <p>Telefone: </p>
+            </Label>
+            <p>{watch('telefone')}</p>
+            <Label>
+              <p>Data de nascimento: </p>
+            </Label>
+            <p>{watch('date')}</p>
+          </ModalContent>
+          <div>
+            <ModalButtons>
+              <ButtonBlue onClick={openSuccessModal}>Sim, finalizar cadastro</ButtonBlue>
+              <Button onClick={reopenModal}>Não, preciso editar</Button>
+            </ModalButtons>
+          </div>
+        </div>
+      </StyledModal>
+      {isSuccessModalOpen && (
+        <SuccessModal isOpen={isSuccessModalOpen} closeModal={closeSuccessModal} >
+          <SuccessButtons>
+            <ButtonBlue>faze login</ButtonBlue>
+          </SuccessButtons>
+        </SuccessModal>
+      )}
     </>
   )
 }
