@@ -2,9 +2,15 @@ import styled from 'styled-components'
 
 const StyledFlex = styled.div`
   display: flex;
-  background-color: ${(props) => props.theme.primary};
+  //background-color: ${(props) => props.theme.primary};
   width: 100%;
   height: 54%;
+  background: linear-gradient(
+    670deg,
+    rgba(254, 240, 207, 1) 0%,
+    rgba(255, 255, 255, 0.26) 100%
+  
+  )
 `
 
 const StyledContent = styled.div`

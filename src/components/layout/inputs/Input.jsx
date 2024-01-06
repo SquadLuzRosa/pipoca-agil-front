@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import InputMask from 'react-input-mask'
-import React, { forwardRef } from 'react'
+import { forwardRef } from 'react'
 
 const InputContainer = styled.div`
   width: 100%;
