@@ -1,9 +1,14 @@
-import style from './Logo.module.css'
+
+import styled from 'styled-components'
 
 function Logo() {
+    const ImgLogo = styled.img`
+      width: 55px;
+      height: auto;
+    `
     return (
       <>
-        <img className={style.img_logo} src="/logo.jpg" />
+        <ImgLogo src="/logo.jpg" />
       </>
     )
   }
