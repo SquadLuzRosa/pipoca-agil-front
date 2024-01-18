@@ -135,6 +135,15 @@ function RegisterPage() {
   }, [isSuccessModalOpen])
 
 
+  const handlePasswordVisibility = (isVisible) => {
+    // Lógica para controlar a visibilidade da senha
+    // Você pode usar o estado local aqui ou realizar outras ações
+    if (isVisible) {
+      console.log('Senha visível');
+    } else {
+      console.log('Senha oculta');
+    }
+  };
   
   return (
     <>
@@ -218,6 +227,7 @@ function RegisterPage() {
                 label="Senha"
                 placeholder="Digite sua senha"
                 error={errors.confirmPassword}
+                onTogglePasswordVisibility={handlePasswordVisibility}
                 {...register('password', {
                   required: 'Senha é obrigatória',
                   minLength: {
