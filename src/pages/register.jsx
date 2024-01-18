@@ -16,6 +16,8 @@ import {
   ButtonModal
 } from '@/components/layout/ModalConfirmation'
 import { SuccessModal, SuccessButtons } from '@/components/layout/SuccessModal'
+import postRegister from './api/user_api/userRegister'
+
 
 const FormContainerOut = styled.div`
   border: 1px solid rgba(204, 204, 204, 0.8);
@@ -94,7 +96,7 @@ function RegisterPage() {
   } = useForm()
 
   const formattedDate = watch('date') ? watch('date').split('-').reverse().join('/') : '';
-
+  
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
@@ -144,7 +146,28 @@ function RegisterPage() {
       console.log('Senha oculta');
     }
   };
+  const postDataFunction = async () => {
+    const formData = {
+      name: 'thiago Silva',
+      email: 'tftf@gmail.com',
+      phone: '61994162084',
+      dateOfBirth: '29/08/2002',
+      password: '123456789@Th',
+      confirmPassword: '123456789@Th'
+    };
   
+    try {
+      const responseData = await postRegister(formData);
+      // Lide com a resposta aqui (se necessário)
+      console.log("Dados enviados com sucesso:", responseData);
+    } catch (error) {
+      // Lide com erros aqui
+      console.error("Erro ao enviar os dados:", error);
+      // Você também pode querer notificar o usuário sobre o erro, se apropriado
+    }
+  };
+
+
   return (
     <>
       <Navbar />
@@ -300,7 +323,7 @@ function RegisterPage() {
           </ModalContent>
           <div>
             <ModalButtons>
-              <ButtonModal colorbg={true} onClick={openSuccessModal}>Sim, finalizar cadastro</ButtonModal>
+              <ButtonModal colorbg={true} onClick={postDataFunction}>Sim, finalizar cadastro</ButtonModal>
               <ButtonModal onClick={reopenModal}>Não, preciso editar</ButtonModal>
             </ModalButtons>
           </div>

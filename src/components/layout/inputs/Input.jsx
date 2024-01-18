@@ -105,23 +105,32 @@ const Input = forwardRef(({ label, error, mask, onTogglePasswordVisibility, type
         <StyledMaskedInput mask={mask} maskChar="_" placeholder={label} error={error} {...props} ref={ref} hasError={hasError}/>
       ) : (
         <InputPassword>
-          <StyledInput
-            type={showPassword ? 'text' : 'password'}
-            placeholder={label}
-            error={error}
-            {...props}
-            ref={ref}
-            hasError={hasError}
-          />
-          {type === 'password' && (
-            <StyledEyeIcon onClick={togglePasswordVisibility}>
-              {showPassword ? 
-                <IconOpenPassword src="/eyer.png" alt="" /> 
-
-              : <IconClosePassword src="/eyer_off.png" alt="" />
-              
-              }
-            </StyledEyeIcon>
+          {type === 'password' ? (
+            <>
+              <StyledInput
+                type={showPassword ? 'text' : 'password'}
+                placeholder={label}
+                error={error}
+                {...props}
+                ref={ref}
+                hasError={hasError}
+              />
+              <StyledEyeIcon onClick={togglePasswordVisibility}>
+                {showPassword ? 
+                  <IconOpenPassword src="/eyer.png" alt="" /> 
+                  : <IconClosePassword src="/eyer_off.png" alt="" />
+                }
+              </StyledEyeIcon>
+            </>
+          ) : (
+            <StyledInput
+              type={type}
+              placeholder={label}
+              error={error}
+              {...props}
+              ref={ref}
+              hasError={hasError}
+            />
           )}
         </InputPassword>
 
