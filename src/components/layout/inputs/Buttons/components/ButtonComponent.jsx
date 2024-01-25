@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 
+
 function ButtonComponent({label, colorbg}) {
   
 
@@ -15,9 +16,8 @@ function ButtonComponent({label, colorbg}) {
     padding: 12px 28px 12px 28px;
     font-size: 18px;
     font-weight: 400;
-
-
   `
+  
   return (
     <>
     

@@ -28,6 +28,7 @@ const FormContainerOut = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-bottom: 120px;
 `
 
 const FormContainer = styled.div`
@@ -61,19 +62,10 @@ const Text = styled.p`
     margin-left: 10px;
   }
 `
-// const TextAlert = styled.p`
-//   font-size: 14px;
-//   font-weight: 400;
-//   color:  ${(props) => props.theme.red};
-//   padding-left: 10px;
-//   margin-top: 8px;
-//   margin-bottom: 15px;
-//   width: 100%;
-//   text-align: left;
-// primaryColor`
 
 const Title = styled.h1`
   margin-top: 20px;
+  margin-bottom: 15px;
   font-size: 24px;
   font-weight: 600;
   text-align: center;
@@ -146,6 +138,7 @@ function RegisterPage() {
       console.log('Senha oculta');
     }
   };
+
   const postDataFunction = async () => {
     const formData = {
       name: 'thiago Silva',
@@ -323,7 +316,7 @@ function RegisterPage() {
           </ModalContent>
           <div>
             <ModalButtons>
-              <ButtonModal colorbg={true} onClick={postDataFunction}>Sim, finalizar cadastro</ButtonModal>
+              <ButtonModal colorbg={true} onClick={SuccessModal}>Sim, finalizar cadastro</ButtonModal>
               <ButtonModal onClick={reopenModal}>Não, preciso editar</ButtonModal>
             </ModalButtons>
           </div>
