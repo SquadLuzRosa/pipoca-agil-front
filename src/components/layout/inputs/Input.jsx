@@ -68,7 +68,7 @@ const InputPassword = styled.span`
 
 const StyledMaskedInput = styled(InputMask)`
   width: 100%;
-  /* border: 1px solid ${(props) => props.theme.colorBorder}; */
+  height: 42px;
   border: 1px solid ${(props) => (props.hasError ? props.theme.red : props.theme.colorBorder)};
   background-color: ${(props) => props.theme.inputBackground};
   padding: 15px;

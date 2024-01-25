@@ -4,8 +4,12 @@ const StyledFlex = styled.div`
   display: flex;
   justify-content: center;
   width: 100vw;
-  height: 54%;
-  background: linear-gradient(670deg, rgba(254, 240, 207, 1) 0%, rgba(255, 255, 255, 0.26) 100%);
+  /* height: 50%; */
+  background: linear-gradient(0deg, #FEF0CF -7.92%, rgba(255, 255, 255, 0.26) 178.75%);
+
+
+  background-repeat: no-repeat;
+
 `
 
 const StyledContainer = styled.div`
@@ -47,11 +51,7 @@ const Logo = styled.span`
   height: 26%;
 `
 
-const StyledLogo1 = styled.span`
-  background-image: url('/Logo-youtube.jpg');
-  background-repeat: no-repeat;
-  background-position: left;
-  background-size: cover;
+const StyledLogo1 = styled.img`
   margin-top: 2%;
   margin-left: 0%;
   display: flex;
@@ -59,11 +59,7 @@ const StyledLogo1 = styled.span`
   height: 56%;
 `
 
-const StyledLogo2 = styled.span`
-  background-image: url('/Logo-spotify.jpg');
-  background-repeat: no-repeat;
-  background-position: left;
-  background-size: cover;
+const StyledLogo2 = styled.img`
   margin-top: 2%;
   margin-right: 86%;
   display: flex;
@@ -93,8 +89,8 @@ export default function SpaceContainer({ children }) {
               Disponíveis nas principais plataformas
             </Title3>
             <Logo>
-              <StyledLogo1 />
-              <StyledLogo2 />
+              <StyledLogo1 src={"/icon_youtube.svg"} />
+              <StyledLogo2 src={"/icon_spotify.svg"} />
             </Logo>
           </StyledContent>
           <StyledForm>{children}</StyledForm>
