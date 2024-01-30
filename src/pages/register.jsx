@@ -5,7 +5,7 @@ import { useRef, useState, useEffect } from 'react'
 import Navbar from '@/components/layout/Navbar'
 import SpaceContainer from '@/components/layout/SpaceContainer'
 import Input from '@/components/layout/inputs/Input'
-import { ButtonBlue, Button } from '@/components/layout/inputs/Button'
+import { ButtonBlue } from '@/components/layout/inputs/Button'
 import {
   ModalButtons,
   ModalContent,
@@ -20,15 +20,34 @@ import postRegister from './api/user_api/userRegister'
 
 
 const FormContainerOut = styled.div`
-  border: 1px solid rgba(204, 204, 204, 0.8);
-  background-color: ${(props) => props.theme.white}; 
+  border: 1px solid ${(props) => props.theme.inputBorder};
+  background-color: ${(props) => props.theme.white};
   border-radius: 12px;
   padding: 10px;
   width: 490px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 120px;
+  @media (max-width: 1440px) {
+    display: flex;
+    width: 494px;
+    max-width: 494px;
+    padding: 16px;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 744px) and (max-width: 1133px) {
+    display: flex;
+    padding: 6px;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin-left: 40px;
+  }
+
 `
 
 const FormContainer = styled.div`
@@ -38,6 +57,11 @@ const FormContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  @media (max-width: 1440px) {
+    margin-top: 8px;
+  }
+
 `
 
 const Form = styled.form`
@@ -48,6 +72,18 @@ const Form = styled.form`
   flex-direction: column;
   margin: 20px 0;
   gap: 20px;
+
+  @media (max-width: 1440px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: stretch;
+  }
+
+  @media (min-width: 744px) and (max-width: 1133px) {
+    padding: 16px;
+    flex-direction: column;
+  }
 `
 
 const Text = styled.p`
@@ -57,7 +93,8 @@ const Text = styled.p`
   text-align: center;
   color: ${(props) => props.theme.placeholderColor};
 
-  a{
+  a {
+
     color: ${(props) => props.theme.primaryColor};
     margin-left: 10px;
   }
@@ -65,11 +102,15 @@ const Text = styled.p`
 
 const Title = styled.h1`
   margin-top: 20px;
-  margin-bottom: 15px;
   font-size: 24px;
   font-weight: 600;
   text-align: center;
   color: ${(props) => props.theme.primaryColor};
+  @media (max-width: 1440px) {
+    height: 34px;
+    font-size: 24px;
+  }
+
 `
 
 const Label = styled.p`
@@ -87,9 +128,7 @@ function RegisterPage() {
     watch
   } = useForm()
 
-  const formattedDate = watch('date') ? watch('date').split('-').reverse().join('/') : '';
-  
-
+  const formattedDate = watch('date') ? watch('date').split('-').reverse().join('/') : ''
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
   const successModalRef = useRef(null)
@@ -128,47 +167,22 @@ function RegisterPage() {
     }
   }, [isSuccessModalOpen])
 
-
   const handlePasswordVisibility = (isVisible) => {
     // Lógica para controlar a visibilidade da senha
     // Você pode usar o estado local aqui ou realizar outras ações
     if (isVisible) {
-      console.log('Senha visível');
+      console.log('Senha visível')
     } else {
-      console.log('Senha oculta');
+      console.log('Senha oculta')
     }
-  };
-
-  const postDataFunction = async () => {
-    const formData = {
-      name: 'thiago Silva',
-      email: 'tftf@gmail.com',
-      phone: '61994162084',
-      dateOfBirth: '29/08/2002',
-      password: '123456789@Th',
-      confirmPassword: '123456789@Th'
-    };
-  
-    try {
-      const responseData = await postRegister(formData);
-      // Lide com a resposta aqui (se necessário)
-      console.log("Dados enviados com sucesso:", responseData);
-    } catch (error) {
-      // Lide com erros aqui
-      console.error("Erro ao enviar os dados:", error);
-      // Você também pode querer notificar o usuário sobre o erro, se apropriado
-    }
-  };
-
+  }
 
   return (
     <>
       <Navbar />
       <SpaceContainer>
         <FormContainerOut>
-          <Title>
-            Cadastro
-          </Title>
+          <Title>Cadastro</Title>
           <FormContainer>
             <Form onSubmit={handleSubmit(handleForm)}>
               <Input
@@ -188,7 +202,20 @@ function RegisterPage() {
                   }
                 })}
               />
-              {errors.nome && <p style={{ color: '#bd2415', width: '100%', fontSize: '14px', fontWeight: '400', paddingLeft: '10px', textAlign: 'left'   }}>{errors.nome.message}</p>}
+              {errors.nome && (
+                <p
+                  style={{
+                    color: '#bd2415',
+                    width: '100%',
+                    fontSize: '14px',
+                    fontWeight: '400',
+                    paddingLeft: '10px',
+                    textAlign: 'left'
+                  }}
+                >
+                  {errors.nome.message}
+                </p>
+              )}
 
               <Input
                 type="email"
@@ -203,7 +230,21 @@ function RegisterPage() {
                   }
                 })}
               />
-              {errors.email && <p style={{ color: '#bd2415', width: '100%', fontSize: '14px', fontWeight: '400', paddingLeft: '10px', textAlign: 'left'   }}>{errors.email.message}</p>}
+
+              {errors.email && (
+                <p
+                  style={{
+                    color: '#bd2415',
+                    width: '100%',
+                    fontSize: '14px',
+                    fontWeight: '400',
+                    paddingLeft: '10px',
+                    textAlign: 'left'
+                  }}
+                >
+                  {errors.email.message}
+                </p>
+              )}
 
               <Input
                 label="Telefone"
@@ -218,7 +259,21 @@ function RegisterPage() {
                   }
                 })}
               />
-              {errors.telefone && <p style={{ color: '#bd2415', width: '100%', fontSize: '14px', fontWeight: '400', paddingLeft: '10px', textAlign: 'left'   }}>{errors.telefone.message}</p>}
+
+              {errors.telefone && (
+                <p
+                  style={{
+                    color: '#bd2415',
+                    width: '100%',
+                    fontSize: '14px',
+                    fontWeight: '400',
+                    paddingLeft: '10px',
+                    textAlign: 'left'
+                  }}
+                >
+                  {errors.telefone.message}
+                </p>
+              )}
 
               <Input
                 type="date"
@@ -236,7 +291,22 @@ function RegisterPage() {
                   }
                 })}
               />
-              {errors.date && <p style={{ color: '#bd2415', width: '100%', fontSize: '14px', fontWeight: '400', paddingLeft: '10px', textAlign: 'left'   }}>{errors.date.message}</p>}
+
+              {errors.date && (
+                <p
+                  style={{
+                    color: '#bd2415',
+                    width: '100%',
+                    fontSize: '14px',
+                    fontWeight: '400',
+                    paddingLeft: '10px',
+                    textAlign: 'left'
+                  }}
+                >
+                  {errors.date.message}
+                </p>
+              )}
+
 
               <Input
                 type="password"
@@ -257,7 +327,22 @@ function RegisterPage() {
                   }
                 })}
               />
-              {errors.password && <p style={{ color: '#bd2415', width: '100%', fontSize: '14px', fontWeight: '400', paddingLeft: '10px', textAlign: 'left'   }}>{errors.password.message}</p>}
+
+              {errors.password && (
+                <p
+                  style={{
+                    color: '#bd2415',
+                    width: '100%',
+                    fontSize: '14px',
+                    fontWeight: '400',
+                    paddingLeft: '10px',
+                    textAlign: 'left'
+                  }}
+                >
+                  {errors.password.message}
+                </p>
+              )}
+
 
               <Input
                 type="password"
@@ -271,9 +356,19 @@ function RegisterPage() {
                 })}
               />
               {errors.confirmPassword && (
-                <p style={{ color: '#bd2415', width: '100%', fontSize: '14px', fontWeight: '400', paddingLeft: '10px', textAlign: 'left'   }}>{errors.confirmPassword.message}</p>
+                <p
+                  style={{
+                    color: '#bd2415',
+                    width: '100%',
+                    fontSize: '14px',
+                    fontWeight: '400',
+                    paddingLeft: '10px',
+                    textAlign: 'left'
+                  }}
+                >
+                  {errors.confirmPassword.message}
+                </p>
               )}
-
               <ButtonBlue type="submit">Cadastrar</ButtonBlue>
             </Form>
             <Text>
@@ -288,14 +383,12 @@ function RegisterPage() {
         contentLabel="Confirmação de Dados"
         style={{
           overlay: {
-            backgroundColor: 'rgba(0, 0, 0, 0.3)', // Cor e opacidade do overlay
-          },
+            backgroundColor: 'rgba(0, 0, 0, 0.3)' // Cor e opacidade do overlay
+          }
         }}
       >
         <div>
-          <TitleModal>
-            Os dados informados estão corretos?
-          </TitleModal>
+          <TitleModal>Os dados informados estão corretos?</TitleModal>
           <ModalContent>
             <LabelModal>
               <p label>Nome completo </p>
@@ -316,14 +409,16 @@ function RegisterPage() {
           </ModalContent>
           <div>
             <ModalButtons>
-              <ButtonModal colorbg={true} onClick={SuccessModal}>Sim, finalizar cadastro</ButtonModal>
+              <ButtonModal colorbg={true} onClick={openSuccessModal}>
+                Sim, finalizar cadastro
+              </ButtonModal>
               <ButtonModal onClick={reopenModal}>Não, preciso editar</ButtonModal>
             </ModalButtons>
           </div>
         </div>
       </StyledModal>
       {isSuccessModalOpen && (
-        <SuccessModal isOpen={isSuccessModalOpen} closeModal={closeSuccessModal} >
+        <SuccessModal isOpen={isSuccessModalOpen} closeModal={closeSuccessModal}>
           <SuccessButtons>
             <ButtonModal onClick={reopenModal}>Fazer login</ButtonModal>
           </SuccessButtons>
