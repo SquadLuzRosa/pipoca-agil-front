@@ -23,3 +23,4 @@ function ButtonComponent({ label, colorbg }) {
 }
 
 export default ButtonComponent
+

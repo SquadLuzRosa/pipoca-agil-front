@@ -90,13 +90,14 @@ const SuccessTitle = styled.h2`
     line-height: 130%; /* 31.2px */
     letter-spacing: 0.24px;
   }
-`
+
 
 const SuccessButtons = styled.div`
   width: 455px;
   display: flex;
   align-items: center;
   justify-content: center;
+
 
   @media (min-width: 1134px) {
     button:nth-child(2) {
@@ -151,7 +152,22 @@ export const ButtonModal = styled.button`
     align-items: center;
     gap: 10px;
   }
+
 `
+
+export const ButtonModal = styled.button`
+  color: ${(props) => (props.colorbg ? props.theme.white : props.theme.primaryColor)};
+  background-color: ${(props) => (props.colorbg ? props.theme.primaryColor : 'transparent')};
+  width: 90%;
+  height: 45px;
+  padding: 12px 28px 12px 28px;
+  border: ${(props) => (props.colorbg ? 'none' : '2px solid' + props.theme.primaryColor)};
+  border-radius: 24px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 400;
+`;
+
 
 export const SuccessModal = ({ isOpen }) => {
   return (
@@ -162,6 +178,7 @@ export const SuccessModal = ({ isOpen }) => {
       <SuccessButtons>
         <ButtonModal colorbg={true}>Fazer login</ButtonModal>
         <ButtonModal colorbg={false}>Ir para a Página Inicial</ButtonModal>
+
       </SuccessButtons>
     </StyledSuccessModal>
   )

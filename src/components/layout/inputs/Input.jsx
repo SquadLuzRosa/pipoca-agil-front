@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 import InputMask from 'react-input-mask'
 import { forwardRef, useState } from 'react'
+import ClosedEyeIcon from '../eyers/ClosedEyeIcon'
+import OpenEyeIcon from '../eyers/OpenEyeIcon'
+
+
 
 const InputContainer = styled.div`
   width: 100%;
@@ -28,6 +32,9 @@ const StyledInput = styled.input`
   &:focus {
     outline: none;
     border: 1px solid #7385a9;
+  }
+  &::placeholder{
+    color: ${(props) => props.theme.placeholderColor};
   }
   &::placeholder {
     color: ${(props) => props.theme.placeholderColor};
@@ -60,6 +67,33 @@ const InputPassword = styled.span`
   display: flex;
   position: relative;
 `
+const IconOpenPassword = styled.img`
+  width: 20px;
+  object-fit: cover;
+  margin: 0;
+`;
+const IconClosePassword = styled.img`
+  width: 20px;
+  object-fit: cover;
+  margin: 0;
+`;
+
+const StyledEyeIcon = styled.span`
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  
+  transform: translate(0,-50%);
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  `
+
+const InputPassword = styled.span`
+  display: flex;
+  position: relative;
+`;
 
 const StyledMaskedInput = styled(InputMask)`
   width: 100%;
@@ -142,5 +176,6 @@ const Input = forwardRef(
     )
   }
 )
+
 
 export default Input

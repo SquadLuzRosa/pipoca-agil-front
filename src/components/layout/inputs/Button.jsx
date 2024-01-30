@@ -9,6 +9,7 @@ export const Button = styled.button`
   border: 1px solid ${(props) => props.theme.primaryColor};
   color: ${(props) => props.theme.primaryColor};
   font-weight: bold;
+
 `
 
 export const ButtonBlue = styled.button`
@@ -26,3 +27,4 @@ export const ButtonBlue = styled.button`
   font-size: 20px;
   font-weight: 400;
 `
+

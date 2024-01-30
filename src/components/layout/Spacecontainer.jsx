@@ -18,10 +18,16 @@ const StyledFlex = styled.div`
     width: 150vh;
     height: 305vh;
   }
-`
 
+
+const StyledContainer = styled.div`
+  width: 1200px; 
+  margin-top: 48px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+`
 const StyledContent = styled.div`
-  width: 50%;
   height: 35vh;
   margin-top: 9%;
   margin-left: 6%;
@@ -143,12 +149,14 @@ const StyledForm = styled.div`
   @media (min-width: 320px) and (max-width: 600px) {
     background-color: #833e10;
   }
+
 `
 
 export default function SpaceContainer({ children }) {
   return (
     <>
       <StyledFlex>
+        <StyledContainer>
         <StyledContent>
           <Title1>Inscreva-se gratuitamente</Title1>
           <Title2>

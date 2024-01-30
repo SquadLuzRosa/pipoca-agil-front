@@ -51,7 +51,7 @@ export const ModalContent = styled.div`
     font-size: 16px;
     font-weight: 600;
   }
-`
+
 
 export const ModalButtons = styled.div`
   display: flex;
@@ -85,7 +85,7 @@ export const TitleModal = styled.h2`
     line-height: normal;
     padding-top: 25px;
   }
-`
+
 export const LabelModal = styled.h3`
   font-size: 24px;
   font-weight: 600;
@@ -98,12 +98,14 @@ export const LabelModal = styled.h3`
     font-size: 16px;
     font-weight: 600;
   }
+
 `
 export const TextModal = styled.p`
   font-size: 23px;
   font-weight: 400;
   text-align: center;
   margin-bottom: 15px;
+
   color: ${(props) => props.theme.colorText2};
 
   @media (min-width: 744px) and (max-width: 1133px) {
@@ -131,7 +133,20 @@ export const ButtonModal = styled.button`
     margin-right: 5px;
     margin-left: 20px;
   }
+
 `
+export const ButtonModal = styled.button`
+  color: ${(props) => (props.colorbg ? props.theme.white : props.theme.primaryColor)};
+  background-color: ${(props) => (props.colorbg ? props.theme.primaryColor : 'transparent')};
+  height: 48px;
+  padding: 12px 28px 12px 28px;
+  border: ${(props) => (props.colorbg ? 'none' : '2px solid' + props.theme.primaryColor)};
+  border-radius: 24px;
+  margin: 20px 35px 30px 35px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 400;
+`;
 
 export const Modal = ({ isOpen, onRequestClose, contentLabel }) => (
   <StyledModal isOpen={isOpen} onRequestClose={onRequestClose} contentLabel={contentLabel} />

@@ -16,6 +16,8 @@ import {
   ButtonModal
 } from '@/components/layout/ModalConfirmation'
 import { SuccessModal, SuccessButtons } from '@/components/layout/SuccessModal'
+import postRegister from './api/user_api/userRegister'
+
 
 const FormContainerOut = styled.div`
   border: 1px solid ${(props) => props.theme.inputBorder};
@@ -26,7 +28,6 @@ const FormContainerOut = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-
   @media (max-width: 1440px) {
     display: flex;
     width: 494px;
@@ -46,6 +47,7 @@ const FormContainerOut = styled.div`
     gap: 24px;
     margin-left: 40px;
   }
+
 `
 
 const FormContainer = styled.div`
@@ -59,6 +61,7 @@ const FormContainer = styled.div`
   @media (max-width: 1440px) {
     margin-top: 8px;
   }
+
 `
 
 const Form = styled.form`
@@ -91,6 +94,7 @@ const Text = styled.p`
   color: ${(props) => props.theme.placeholderColor};
 
   a {
+
     color: ${(props) => props.theme.primaryColor};
     margin-left: 10px;
   }
@@ -102,11 +106,11 @@ const Title = styled.h1`
   font-weight: 600;
   text-align: center;
   color: ${(props) => props.theme.primaryColor};
-
   @media (max-width: 1440px) {
     height: 34px;
     font-size: 24px;
   }
+
 `
 
 const Label = styled.p`
@@ -125,7 +129,6 @@ function RegisterPage() {
   } = useForm()
 
   const formattedDate = watch('date') ? watch('date').split('-').reverse().join('/') : ''
-
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
   const successModalRef = useRef(null)
@@ -227,6 +230,7 @@ function RegisterPage() {
                   }
                 })}
               />
+
               {errors.email && (
                 <p
                   style={{
@@ -255,6 +259,7 @@ function RegisterPage() {
                   }
                 })}
               />
+
               {errors.telefone && (
                 <p
                   style={{
@@ -286,6 +291,7 @@ function RegisterPage() {
                   }
                 })}
               />
+
               {errors.date && (
                 <p
                   style={{
@@ -300,6 +306,7 @@ function RegisterPage() {
                   {errors.date.message}
                 </p>
               )}
+
 
               <Input
                 type="password"
@@ -320,6 +327,7 @@ function RegisterPage() {
                   }
                 })}
               />
+
               {errors.password && (
                 <p
                   style={{
@@ -334,6 +342,7 @@ function RegisterPage() {
                   {errors.password.message}
                 </p>
               )}
+
 
               <Input
                 type="password"

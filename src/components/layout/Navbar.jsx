@@ -2,6 +2,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import ButtonComponent from './inputs/Buttons/components/ButtonComponent'
 
+
 const StyledNavbar = styled.div`
   background-color: ${(props) => props.theme.white};
   height: 80px;
@@ -20,6 +21,7 @@ const StyledNavbar = styled.div`
     width: 305%;
     height: 38px;
   }
+
 `
 
 const ContainerNavbar = styled.div`
@@ -60,6 +62,7 @@ const StyledMenu = styled.div`
 
   @media (min-width: 320px) and (max-width: 600px) {
   }
+
 `
 
 const MenuItems = styled.div`
@@ -123,6 +126,7 @@ const StyledInicio = styled.span`
   @media (min-width: 744px) and (max-width: 1133px) {
     display: none;
   }
+
 `
 
 const StyledSobre = styled.span`
@@ -133,6 +137,7 @@ const StyledSobre = styled.span`
   @media (min-width: 744px) and (max-width: 1133px) {
     display: none;
   }
+
 `
 
 const StyledEpisodios = styled.span`
@@ -143,6 +148,7 @@ const StyledEpisodios = styled.span`
   @media (min-width: 744px) and (max-width: 1133px) {
     display: none;
   }
+
 `
 
 const StyledProjetos = styled.span`
@@ -153,6 +159,7 @@ const StyledProjetos = styled.span`
   @media (min-width: 744px) and (max-width: 1133px) {
     display: none;
   }
+
 `
 
 const StyledBlog = styled.span`
@@ -232,7 +239,9 @@ const StyledLogo2 = styled.span`
     height: 50px;
     margin-right: 53%;
   }
+
 `
+
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -276,6 +285,7 @@ function Navbar() {
       <StyledLogin>
         <ButtonComponent colorbg={true} label={'Cadastre-se'} />
         <ButtonComponent label={'Login'} />
+
       </StyledLogin>
     </StyledNavbar>
   )
