@@ -6,19 +6,23 @@ export const Button = styled.button`
   height: 60px;
   cursor: pointer;
   border-radius: 70px;
-  border: 1px solid ${(props) => props.theme.colorText};
-  color: ${(props) => props.theme.colorText};
+  border: 1px solid ${(props) => props.theme.primaryColor};
+  color: ${(props) => props.theme.primaryColor};
   font-weight: bold;
 `
+
 export const ButtonBlue = styled.button`
-  background-color: ${(props) => props.theme.colorText};
-  width: 180px;
-  height: 60px;
+  background-color: ${(props) => props.theme.primaryColor};
+  label
+  width: 156px;
+  height: 48px;
   cursor: pointer;
-  margin-top: 10px;
-  margin-left: 200px;
-  border-radius: 45px;
-  border: 1px solid ${(props) => props.theme.colorText};
+  padding: 13px 28px 13px 28px;
+  margin: 10px 0;
+  border-radius: 24px;
+  border: 1px solid ${(props) => props.theme.primaryColor};
   color: ${(props) => props.theme.white};
-  font-size: 22px;
+
+  font-size: 20px;
+  font-weight: 400;
 `
