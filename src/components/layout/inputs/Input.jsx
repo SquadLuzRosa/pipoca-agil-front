@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 import InputMask from 'react-input-mask'
 import { forwardRef, useState } from 'react'
-
 import ClosedEyeIcon from '../eyers/ClosedEyeIcon'
 import OpenEyeIcon from '../eyers/OpenEyeIcon'
+
 
 
 const InputContainer = styled.div`
@@ -20,7 +20,7 @@ const StyledLabel = styled.p`
 
 const StyledInput = styled.input`
   width: 100%;
-  height: 42px;;
+  height: 42px;
   /* border: 1px solid ${(props) => props.theme.colorBorder}; */
   border: 1px solid ${(props) => (props.hasError ? props.theme.red : props.theme.colorBorder)};
   background-color: ${(props) => props.theme.inputBackground};
@@ -28,7 +28,6 @@ const StyledInput = styled.input`
   box-sizing: border-box;
   border-radius: 10px;
   color: ${(props) => props.theme.primaryColor};
-  
 
   &:focus {
     outline: none;
@@ -37,6 +36,36 @@ const StyledInput = styled.input`
   &::placeholder{
     color: ${(props) => props.theme.placeholderColor};
   }
+  &::placeholder {
+    color: ${(props) => props.theme.placeholderColor};
+  }
+`
+const IconOpenPassword = styled.img`
+  width: 20px;
+  object-fit: cover;
+  margin: 0;
+`
+const IconClosePassword = styled.img`
+  width: 20px;
+  object-fit: cover;
+  margin: 0;
+`
+
+const StyledEyeIcon = styled.span`
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+
+  transform: translate(0, -50%);
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+`
+
+const InputPassword = styled.span`
+  display: flex;
+  position: relative;
 `
 const IconOpenPassword = styled.img`
   width: 20px;
@@ -68,7 +97,7 @@ const InputPassword = styled.span`
 
 const StyledMaskedInput = styled(InputMask)`
   width: 100%;
-  height: 42px;
+  /* border: 1px solid ${(props) => props.theme.colorBorder}; */
   border: 1px solid ${(props) => (props.hasError ? props.theme.red : props.theme.colorBorder)};
   background-color: ${(props) => props.theme.inputBackground};
   padding: 15px;
@@ -82,61 +111,71 @@ const StyledMaskedInput = styled(InputMask)`
     border: 1px solid #7385a9;
   }
 
-  &::placeholder{
+  &::placeholder {
     color: ${(props) => props.theme.placeholderColor};
   }
 `
 
-const Input = forwardRef(({ label, error, mask, onTogglePasswordVisibility, type, ...props }, ref) => {
-  const [showPassword, setShowPassword] = useState(false);
-  const hasError = !!error;
+const Input = forwardRef(
+  ({ label, error, mask, onTogglePasswordVisibility, type, ...props }, ref) => {
+    const [showPassword, setShowPassword] = useState(false)
+    const hasError = !!error
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-    if (onTogglePasswordVisibility) {
-      onTogglePasswordVisibility(!showPassword);
+    const togglePasswordVisibility = () => {
+      setShowPassword(!showPassword)
+      if (onTogglePasswordVisibility) {
+        onTogglePasswordVisibility(!showPassword)
+      }
     }
-  };
-
-  return (
-    <InputContainer>
-      <StyledLabel>{label}</StyledLabel>
-      {mask ? (
-        <StyledMaskedInput mask={mask} maskChar="_" placeholder={label} error={error} {...props} ref={ref} hasError={hasError}/>
-      ) : (
-        <InputPassword>
-          {type === 'password' ? (
-            <>
+    return (
+      <InputContainer>
+        <StyledLabel>{label}</StyledLabel>
+        {mask ? (
+          <StyledMaskedInput
+            mask={mask}
+            maskChar="_"
+            placeholder={label}
+            error={error}
+            {...props}
+            ref={ref}
+            hasError={hasError}
+          />
+        ) : (
+          <InputPassword>
+            {type === 'password' ? (
+              <>
+                <StyledInput
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder={label}
+                  error={error}
+                  {...props}
+                  ref={ref}
+                  hasError={hasError}
+                />
+                <StyledEyeIcon onClick={togglePasswordVisibility}>
+                  {showPassword ? (
+                    <IconOpenPassword src="/eyer.png" alt="" />
+                  ) : (
+                    <IconClosePassword src="/eyer_off.png" alt="" />
+                  )}
+                </StyledEyeIcon>
+              </>
+            ) : (
               <StyledInput
-                type={showPassword ? 'text' : 'password'}
+                type={type}
                 placeholder={label}
                 error={error}
                 {...props}
                 ref={ref}
                 hasError={hasError}
               />
-              <StyledEyeIcon onClick={togglePasswordVisibility}>
-                {showPassword ? 
-                  <IconOpenPassword src="/eyer.png" alt="" /> 
-                  : <IconClosePassword src="/eyer_off.png" alt="" />
-                }
-              </StyledEyeIcon>
-            </>
-          ) : (
-            <StyledInput
-              type={type}
-              placeholder={label}
-              error={error}
-              {...props}
-              ref={ref}
-              hasError={hasError}
-            />
-          )}
-        </InputPassword>
+            )}
+          </InputPassword>
+        )}
+      </InputContainer>
+    )
+  }
+)
 
-      )}
-    </InputContainer>
-  )
-})
 
 export default Input

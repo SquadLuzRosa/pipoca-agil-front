@@ -14,13 +14,14 @@ export const Button = styled.button`
 
 export const ButtonBlue = styled.button`
   background-color: ${(props) => props.theme.primaryColor};
+  label
   width: 156px;
   height: 48px;
   cursor: pointer;
   padding: 13px 28px 13px 28px;
   margin: 10px 0;
   border-radius: 24px;
-  border: 1px solid  ${(props) => props.theme.primaryColor};
+  border: 1px solid ${(props) => props.theme.primaryColor};
   color: ${(props) => props.theme.white};
 
   font-size: 20px;
